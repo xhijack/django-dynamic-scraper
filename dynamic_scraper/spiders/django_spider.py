@@ -430,7 +430,7 @@ class DjangoSpider(DjangoBaseSpider):
         for obj in base_objects:
             item_num = self.items_read_count + 1
             self.tmp_non_db_results[item_num] = {}
-            self.log("Starting to crawl item {i} from page {p}.".format(i=str(item_num), p=str(response.request.meta['page'])), logging.INFO)
+            self.log("Starting to crawl item {i} from page {p}.".format(i=str(item_num), p=str(response.request.meta.get('page'))), logging.INFO)
             item = self.parse_item(response, obj, 'MP', item_num)
             #print item
             
