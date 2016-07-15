@@ -50,7 +50,7 @@ class TaskUtils(object):
             filter_kwargs[key] = kwargs[key]
         
         max = settings.get('DSCRAPER_MAX_SPIDER_RUNS_PER_TASK', self.conf['MAX_SPIDER_RUNS_PER_TASK'])
-        ref_obj_list = ref_obj_class.objects.filter(*args, **filter_kwargs).order_by(runtime_field_name + '__next_action_time')[:max]
+        ref_obj_list = ref_obj_class.objects.filter(is_active=True)
         if not self._pending_jobs(spider_name):
             for ref_object in ref_obj_list:
                 self._run_spider(id=ref_object.pk, spider=spider_name, run_type='TASK', do_action='yes')
